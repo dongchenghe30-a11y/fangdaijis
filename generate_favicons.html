@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon生成器 - 使用说明</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #3b82f6;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .tool-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        .tool-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .tool-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+        .tool-url {
+            color: #666;
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .steps {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3b82f6;
+            margin: 15px 0;
+        }
+        .step {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .step:before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #2563eb;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .preview {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .preview svg {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Favicon生成器指南</h1>
+        
+        <div class="preview">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100" height="100">
+                <rect x="50" y="200" width="412" height="280" fill="#3b82f6"/>
+                <polygon points="50,200 256,50 462,200" fill="#2563eb"/>
+                <rect x="200" y="300" width="112" height="180" fill="#ffffff"/>
+                <rect x="215" y="380" width="82" height="100" fill="#2563eb"/>
+                <text x="256" y="460" font-size="40" fill="#3b82f6" text-anchor="middle" font-weight="bold" font-family="Arial">¥</text>
+            </svg>
+            <p><strong>您网站的favicon设计</strong></p>
+        </div>
+
+        <div class="note">
+            <strong>提示：</strong>我已经为您创建了一个SVG格式的favicon文件（favicon.svg），但还需要生成其他格式的文件以获得最佳兼容性。
+        </div>
+
+        <h2>⚡ 快速生成（推荐方法）</h2>
+
+        <div class="tool-card">
+            <div class="tool-name">1. Favicon.io（最简单）</div>
+            <div class="tool-url">https://favicon.io/</div>
+            <div class="steps">
+                <strong>使用步骤：</strong>
+                <div class="step">访问 https://favicon.io/</div>
+                <div class="step">点击 "Upload Image" 上传您的logo图片</div>
+                <div class="step">或选择 "Emoji" 选择 🏠 房子图标</div>
+                <div class="step">点击 "Download" 下载生成的zip文件</div>
+                <div class="step">解压后将文件复制到项目根目录</div>
+            </div>
+            <a href="https://favicon.io/" target="_blank" class="button">立即使用 Favicon.io</a>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-name">2. RealFaviconGenerator（最全面）</div>
+            <div class="tool-url">https://realfavicongenerator.net/</div>
+            <div class="steps">
+                <strong>使用步骤：</strong>
+                <div class="step">访问 https://realfavicongenerator.net/</div>
+                <div class="step">点击 "Select your Favicon image" 上传图片</div>
+                <div class="step">调整设置（背景颜色、边距等）</div>
+                <div class="step">点击 "Generate your Favicons"</div>
+                <div class="step">下载生成的包并复制文件到项目目录</div>
+            </div>
+            <a href="https://realfavicongenerator.net/" target="_blank" class="button">立即使用 RealFaviconGenerator</a>
+        </div>
+
+        <h2>📱 需要的文件</h2>
+        <div class="steps">
+            <strong>将这些文件放在网站根目录（与index.html同级）：</strong>
+            <div class="step">favicon.ico - 传统格式（必须）</div>
+            <div class="step">favicon-16x16.png - 小图标（必须）</div>
+            <div class="step">favicon-32x32.png - 标准图标（推荐）</div>
+            <div class="step">favicon.svg - 矢量图标（已创建）</div>
+            <div class="step">apple-touch-icon.png - iOS图标（可选）</div>
+        </div>
+
+        <h2>🎯 推荐方案（3分钟完成）</h2>
+        <div class="steps">
+            <div class="step">访问 <strong>Favicon.io</strong>：https://favicon.io/</div>
+            <div class="step">选择 <strong>Emoji</strong> 类型</div>
+            <div class="step">输入或选择：<strong>🏠</strong> 或 <strong>💰</strong></div>
+            <div class="step">点击 <strong>Download</strong></div>
+            <div class="step">解压后复制所有文件到项目根目录</div>
+            <div class="step">刷新浏览器查看效果</div>
+        </div>
+
+        <h2>🔧 测试步骤</h2>
+        <div class="steps">
+            <div class="step">添加favicon文件到项目根目录</div>
+            <div class="step">清除浏览器缓存（Ctrl+Shift+Delete）</div>
+            <div class="step">强制刷新页面（Ctrl+F5）</div>
+            <div class="step">查看浏览器标签页是否显示新图标</div>
+        </div>
+
+        <h2>📚 其他工具</h2>
+        
+        <div class="tool-card">
+            <div class="tool-name">3. Favicon.cc</div>
+            <div class="tool-url">https://www.favicon.cc/</div>
+            <p>在线绘制favicon，支持像素级编辑</p>
+            <a href="https://www.favicon.cc/" target="_blank" class="button">访问 Favicon.cc</a>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-name">4. Canva（专业设计）</div>
+            <div class="tool-url">https://www.canva.com/</div>
+            <p>专业设计工具，搜索 "favicon" 模板</p>
+            <a href="https://www.canva.com/" target="_blank" class="button">访问 Canva</a>
+        </div>
+
+        <h2>💡 提示</h2>
+        <div class="steps">
+            <div class="step">HTML代码已经在index.html中添加完成</div>
+            <div class="step">只需将图标文件放在根目录即可</div>
+            <div class="step">清除缓存后才能看到新的favicon</div>
+            <div class="step">建议使用多种格式以获得最佳兼容性</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://favicon.io/" target="_blank" class="button" style="font-size: 1.2em; padding: 15px 40px;">🚀 立即生成Favicon</a>
+        </div>
+
+        <footer style="text-align: center; margin-top: 30px; color: #999;">
+            <p>使用在线工具快速生成favicon文件 | 房贷计算器项目</p>
+        </footer>
+    </div>
+
+    <script>
+        // 自动跳转到favicon.io（可选）
+        // window.location.href = 'https://favicon.io/';
+    </script>
+</body>
+</html>
