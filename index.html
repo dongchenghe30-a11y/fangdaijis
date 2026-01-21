@@ -26,13 +26,57 @@
                 <h2>贷款参数</h2>
                 <form id="calculator-form">
                     <div class="form-group">
-                        <label for="loanAmount">贷款金额（万元）</label>
+                        <label>贷款类型</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="loanType" value="commercial" checked>
+                                <span>商业贷款</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="loanType" value="provident">
+                                <span>公积金贷款</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="loanType" value="combined">
+                                <span>组合贷款</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 公积金贷款参数（仅当选择公积金或组合贷款时显示） -->
+                    <div class="form-group" id="provident-loan-group" style="display: none;">
+                        <label for="providentAmount">公积金贷款金额（万元）</label>
                         <div class="input-group">
-                            <input type="number" id="loanAmount" name="loanAmount" 
-                                   value="100" min="1" max="10000" step="1" required>
+                            <input type="number" id="providentAmount" name="providentAmount" 
+                                   value="50" min="0" max="120" step="0.1" required>
                             <span class="unit">万</span>
                         </div>
-                        <input type="range" id="loanAmountRange" min="1" max="10000" value="100">
+                        <input type="range" id="providentAmountRange" min="0" max="120" value="50" step="1">
+                        
+                        <label for="providentRate" style="margin-top: 15px;">公积金年利率（%）</label>
+                        <div class="input-group">
+                            <input type="number" id="providentRate" name="providentRate" 
+                                   value="3.1" min="1" max="10" step="0.01" required>
+                            <span class="unit">%</span>
+                        </div>
+                        <input type="range" id="providentRateRange" min="1" max="10" value="3.1" step="0.1">
+                        
+                        <p class="rate-note" style="font-size: 0.85rem; color: #64748b; margin-top: 8px;">
+                            ⚠️ 公积金贷款最高额度：个人120万，家庭最高144万（以当地政策为准）
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanAmount">商业贷款金额（万元）</label>
+                        <div class="input-group">
+                            <input type="number" id="loanAmount" name="loanAmount" 
+                                   value="100" min="0.1" max="10000" step="0.1" required>
+                            <span class="unit">万</span>
+                        </div>
+                        <input type="range" id="loanAmountRange" min="1" max="10000" value="100" step="1">
+                        <p class="note" style="font-size: 0.85rem; color: #64748b; margin-top: 5px;">
+                            支持小数输入，如：1.3万、0.5万
+                        </p>
                     </div>
 
                     <div class="form-group">
@@ -43,10 +87,13 @@
                             <span class="unit">年</span>
                         </div>
                         <input type="range" id="loanYearsRange" min="1" max="30" value="30">
+                        <p class="rate-note" style="font-size: 0.85rem; color: #64748b; margin-top: 8px;">
+                            ⚠️ 公积金贷款最长年限：30年（申请人年龄+贷款期限≤65年）
+                        </p>
                     </div>
 
                     <div class="form-group">
-                        <label for="interestRate">年利率（%）</label>
+                        <label for="interestRate">商业贷款年利率（%）</label>
                         <div class="input-group">
                             <input type="number" id="interestRate" name="interestRate" 
                                    value="4.9" min="1" max="20" step="0.01" required>
@@ -69,6 +116,53 @@
                         </div>
                     </div>
 
+                    <!-- 提前还款选项 -->
+                    <div class="form-group" id="prepayment-group">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <input type="checkbox" id="enablePrepayment" style="width: auto; margin: 0;">
+                            <label for="enablePrepayment" style="margin: 0; font-weight: 600; cursor: pointer;">
+                                启用提前还款计算
+                            </label>
+                        </div>
+                        
+                        <div id="prepayment-options" style="display: none; background: #f8fafc; padding: 20px; border-radius: 8px; border: 2px solid var(--border);">
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label for="prepaymentMonth">提前还款时间</label>
+                                <div class="input-group">
+                                    <input type="number" id="prepaymentMonth" name="prepaymentMonth" 
+                                           value="12" min="1" max="360" step="1" required>
+                                    <span class="unit">月后</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label for="prepaymentAmount">提前还款金额（万元）</label>
+                                <div class="input-group">
+                                    <input type="number" id="prepaymentAmount" name="prepaymentAmount" 
+                                           value="10" min="0.1" max="1000" step="0.1" required>
+                                    <span class="unit">万</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>提前还款方式</label>
+                                <div class="radio-group" style="flex-direction: column; gap: 10px;">
+                                    <label class="radio-label" style="margin-bottom: 0;">
+                                        <input type="radio" name="prepaymentMethod" value="reduce-term" checked>
+                                        <span>缩短还款期限（月供不变）</span>
+                                    </label>
+                                    <label class="radio-label" style="margin-bottom: 0;">
+                                        <input type="radio" name="prepaymentMethod" value="reduce-payment">
+                                        <span>减少月供金额（期限不变）</span>
+                                    </label>
+                                </div>
+                                <p class="note" style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">
+                                    💡 提示：缩短期限更能节省利息，减少月供可减轻每月压力
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn-primary">计算</button>
                 </form>
             </section>
@@ -87,6 +181,29 @@
                     <div class="result-card">
                         <div class="result-label">还款总额</div>
                         <div class="result-value" id="totalPayment">--</div>
+                    </div>
+                </div>
+
+                <!-- 提前还款结果（仅当启用提前还款时显示） -->
+                <div id="prepayment-results" style="display: none; margin-bottom: 20px;">
+                    <div class="result-cards" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">
+                        <div class="result-card">
+                            <div class="result-label" style="opacity: 1;">提前还款后月供</div>
+                            <div class="result-value" id="newMonthlyPayment">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label" style="opacity: 1;">节省利息</div>
+                            <div class="result-value" id="savedInterest">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label" style="opacity: 1;">节省金额</div>
+                            <div class="result-value" id="savedTotal">--</div>
+                        </div>
+                    </div>
+                    <div style="background: #f0fdf4; border: 2px solid #22c55e; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                        <p id="prepayment-summary" style="margin: 0; color: #166534; font-size: 0.95rem;">
+                            -- 提前还款结果摘要 --
+                        </p>
                     </div>
                 </div>
 
@@ -117,6 +234,187 @@
                 </div>
                 <button id="exportBtn" class="btn-secondary" style="display: none;">导出还款计划</button>
             </section>
+
+            <!-- 政策信息和注意事项模块 -->
+            <section class="info-section-content">
+                <div class="info-container">
+                    <h2 class="info-header">📊 购房贷款政策与注意事项</h2>
+                    
+                    <!-- 注意事项 -->
+                    <div class="info-item">
+                        <div class="info-title" onclick="toggleInfo('notice-content')">
+                            <span class="info-icon">⚠️</span>
+                            <span>使用注意事项</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="info-content" id="notice-content">
+                            <ul>
+                                <li><strong>计算准确性</strong>：本计算器采用复利计算，结果仅供参考，实际还款金额以银行最终审批为准</li>
+                                <li><strong>利率变动</strong>：LPR利率可能调整，实际还款以还款日银行公布利率为准</li>
+                                <li><strong>提前还款</strong>：部分银行对提前还款有违约金或最低还款期限限制，请咨询贷款银行</li>
+                                <li><strong>公积金额度</strong>：各地公积金贷款政策不同，建议咨询当地住房公积金管理中心</li>
+                                <li><strong>组合贷款</strong>：商业贷款和公积金贷款可同时申请，但公积金部分不得超过规定上限</li>
+                                <li><strong>征信影响</strong>：贷款记录会影响个人征信，请按时还款避免逾期</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 公积金政策 -->
+                    <div class="info-item">
+                        <div class="info-title" onclick="toggleInfo('provident-content')">
+                            <span class="info-icon">🏦</span>
+                            <span>公积金贷款政策（2024年最新）</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="info-content" id="provident-content">
+                            <div class="policy-section">
+                                <h4>💰 贷款额度</h4>
+                                <ul>
+                                    <li><strong>个人贷款</strong>：最高120万元（以当地政策为准，部分城市为80-100万）</li>
+                                    <li><strong>家庭贷款</strong>：最高144万元（以当地政策为准）</li>
+                                    <li><strong>额度计算</strong>：账户余额 × 30倍 + 个人缴费年限 × 1000（具体公式各地不同）</li>
+                                </ul>
+                            </div>
+                            <div class="policy-section">
+                                <h4>📅 贷款期限</h4>
+                                <ul>
+                                    <li><strong>最长年限</strong>：30年</li>
+                                    <li><strong>年龄限制</strong>：申请人年龄 + 贷款期限 ≤ 65年</li>
+                                    <li><strong>房屋年限</strong>：房龄 + 贷款期限 ≤ 50年（具体以当地政策为准）</li>
+                                </ul>
+                            </div>
+                            <div class="policy-section">
+                                <h4>📊 当前利率（2024年）</h4>
+                                <ul>
+                                    <li><strong>5年以上</strong>：3.1%（首次贷款）</li>
+                                    <li><strong>5年及以下</strong>：2.85%</li>
+                                    <li><strong>二次贷款</strong>：利率上浮10%（3.41%，具体以当地政策为准）</li>
+                                </ul>
+                                <p class="policy-note">⚠️ 注：公积金利率由央行统一调整，请以最新公布为准</p>
+                            </div>
+                            <div class="policy-section">
+                                <h4>📋 申请条件</h4>
+                                <ul>
+                                    <li>连续足额缴存住房公积金6个月以上</li>
+                                    <li>有稳定的职业和收入，具备偿还贷款本息的能力</li>
+                                    <li>信用良好，无严重不良征信记录</li>
+                                    <li>提供合法有效的购房合同或协议</li>
+                                    <li>同意用所购住房作为抵押物</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商业贷款政策 -->
+                    <div class="info-item">
+                        <div class="info-title" onclick="toggleInfo('commercial-content')">
+                            <span class="info-icon">💳</span>
+                            <span>商业贷款政策（2024年最新）</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="info-content" id="commercial-content">
+                            <div class="policy-section">
+                                <h4>📊 LPR利率（2024年）</h4>
+                                <ul>
+                                    <li><strong>1年期LPR</strong>：3.45%</li>
+                                    <li><strong>5年期以上LPR</strong>：3.95%（房贷基准利率）</li>
+                                    <li><strong>首套房利率</strong>：LPR - 20基点 = 3.75%（最低，各地可下浮）</li>
+                                    <li><strong>二套房利率</strong>：LPR + 20基点 = 4.15%（最低）</li>
+                                </ul>
+                                <p class="policy-note">⚠️ 注：各城市可根据市场情况调整利率下限，实际利率以银行报价为准</p>
+                            </div>
+                            <div class="policy-section">
+                                <h4>💳 首付比例（2024年）</h4>
+                                <ul>
+                                    <li><strong>首套房</strong>：首付最低20%（部分城市30%）</li>
+                                    <li><strong>二套房</strong>：首付最低30%（部分城市40-50%）</li>
+                                    <li><strong>三套房</strong>：不予贷款（部分城市有特殊政策）</li>
+                                </ul>
+                                <p class="policy-note">⚠️ 注：一二线城市首付比例可能更高，具体以当地政策为准</p>
+                            </div>
+                            <div class="policy-section">
+                                <h4>🏦 银行选择</h4>
+                                <ul>
+                                    <li><strong>四大行</strong>：工商银行、建设银行、农业银行、中国银行（利率相对较低，审批严格）</li>
+                                    <li><strong>股份制银行</strong>：招商、浦发、中信等（利率可能略高，审批较灵活）</li>
+                                    <li><strong>城商行</strong>：北京银行、上海银行等（利率差异化，可咨询当地政策）</li>
+                                </ul>
+                                <p class="policy-note">💡 建议：多家银行对比利率和服务，选择最优惠方案</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 提前还款政策 -->
+                    <div class="info-item">
+                        <div class="info-title" onclick="toggleInfo('prepayment-content')">
+                            <span class="info-icon">💸</span>
+                            <span>提前还款政策</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="info-content" id="prepayment-content">
+                            <div class="policy-section">
+                                <h4>📋 还款条件</h4>
+                                <ul>
+                                    <li><strong>还款期限</strong>：部分银行要求正常还款满1年后方可提前还款</li>
+                                    <li><strong>最低金额</strong>：最低提前还款1万元或剩余本金10%（具体以银行规定为准）</li>
+                                    <li><strong>还款频率</strong>：部分银行限制每年最多还款1次或2次</li>
+                                    <li><strong>违约金</strong>：正常还款1年内提前还款，可能收取1-3%违约金</li>
+                                </ul>
+                            </div>
+                            <div class="policy-section">
+                                <h4>💡 最佳还款时机</h4>
+                                <ul>
+                                    <li><strong>等额本息</strong>：建议在还款前1/3期内提前还款（此时利息占比较高）</li>
+                                    <li><strong>等额本金</strong>：建议在还款前1/4期内提前还款</li>
+                                    <li><strong>利率上升期</strong>：提前还款可锁定较低利息成本</li>
+                                </ul>
+                            </div>
+                            <div class="policy-section">
+                                <h4>🔢 还款方式选择</h4>
+                                <ul>
+                                    <li><strong>缩短期限</strong>：月供不变，提前还完，节省利息最多（推荐）</li>
+                                    <li><strong>减少月供</strong>：期限不变，降低每月还款压力</li>
+                                    <li><strong>部分还款</strong>：根据财务状况灵活选择</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 相关链接 -->
+                    <div class="info-item">
+                        <div class="info-title" onclick="toggleInfo('links-content')">
+                            <span class="info-icon">🔗</span>
+                            <span>官方信息来源</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="info-content" id="links-content">
+                            <ul class="links-list">
+                                <li>
+                                    <a href="https://www.pbc.gov.cn/" target="_blank" rel="noopener noreferrer">
+                                        中国人民银行（央行）- 官方利率发布
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://www.mohurd.gov.cn/" target="_blank" rel="noopener noreferrer">
+                                        住房和城乡建设部 - 公积金政策
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.china-cba.net/" target="_blank" rel="noopener noreferrer">
+                                        中国银行业协会 - 银行服务信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.creditchina.gov.cn/" target="_blank" rel="noopener noreferrer">
+                                        国家企业信用信息公示系统 - 征信查询
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="policy-note">⚠️ 注：以上链接跳转至官方网站，信息更新及时，请以官网最新公布为准</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <footer>
@@ -126,5 +424,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        // 信息展开/收起功能
+        function toggleInfo(contentId) {
+            const content = document.getElementById(contentId);
+            const title = content.previousElementSibling;
+            const icon = title.querySelector('.expand-icon');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                icon.textContent = '▲';
+                title.classList.add('active');
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '▼';
+                title.classList.remove('active');
+            }
+        }
+        
+        // 页面加载时展开注意事项
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleInfo('notice-content');
+        });
+    </script>
 </body>
 </html>

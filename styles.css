@@ -57,18 +57,43 @@ header h1 {
     gap: 30px;
 }
 
+/* 桌面端布局：左侧计算器和结果，右侧政策信息 */
 @media (min-width: 1024px) {
     .main-content {
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: 500px 1fr;
+        grid-template-areas: 
+            "calculator info"
+            "results info"
+            "schedule info";
+        gap: 30px;
+        align-items: start;
     }
     
     .calculator-section {
-        grid-column: 1 / 2;
+        grid-area: calculator;
     }
     
-    .results-section,
+    .results-section {
+        grid-area: results;
+    }
+    
     .schedule-section {
-        grid-column: 2 / -1;
+        grid-area: schedule;
+    }
+    
+    .info-section-content {
+        grid-area: info;
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+    }
+}
+
+/* 中等屏幕：计算器在左，政策信息在下 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-content {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -304,27 +329,46 @@ footer {
     border-top: 1px solid var(--border);
 }
 
-@media (max-width: 768px) {
+/* 移动端优化 */
+@media (max-width: 767px) {
     body {
         padding: 10px;
     }
     
     header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
     }
     
     .calculator-section,
     .results-section,
-    .schedule-section {
+    .schedule-section,
+    .info-section-content {
         padding: 20px;
+        border-radius: 10px;
+    }
+    
+    /* 桌面端布局重置为单栏 */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
     
     .result-cards {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .result-value {
         font-size: 1.5rem;
+    }
+    
+    .result-card {
+        padding: 20px;
     }
     
     .chart-container {
@@ -332,11 +376,180 @@ footer {
     }
     
     table {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
     th, td {
+        padding: 8px 6px;
+    }
+    
+    /* 表单优化 */
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .input-group input[type="number"] {
+        width: 100%;
+    }
+    
+    .unit {
+        text-align: left;
+        padding-left: 0;
+    }
+    
+    /* 按钮优化 */
+    .btn-primary,
+    .btn-secondary {
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+    
+    /* 滑块优化 */
+    input[type="range"] {
+        height: 6px;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* 单选按钮组优化 */
+    .radio-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .radio-label {
+        padding: 12px 16px;
+    }
+    
+    /* 政策信息移动端优化 */
+    .info-section-content {
+        margin-top: 10px;
+    }
+    
+    .info-header {
+        font-size: 1.4rem;
+        padding-bottom: 15px;
+    }
+    
+    .info-title {
+        font-size: 1rem;
+        padding: 14px 16px;
+    }
+    
+    .info-icon {
+        font-size: 1.3rem;
+    }
+    
+    .info-content {
+        padding: 15px;
+    }
+    
+    .info-content ul li {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+        line-height: 1.6;
+    }
+    
+    .policy-section h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .policy-note {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        margin-top: 12px;
+    }
+    
+    /* 链接优化 */
+    .links-list a {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* 提前还款选项优化 */
+    #prepayment-options {
+        padding: 15px;
+    }
+    
+    #prepayment-options .form-group {
+        margin-bottom: 15px;
+    }
+}
+
+/* 小屏手机优化（≤ 480px） */
+@media (max-width: 480px) {
+    body {
         padding: 8px;
+    }
+    
+    header {
+        padding: 20px 0;
+        margin-bottom: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .calculator-section,
+    .results-section,
+    .schedule-section,
+    .info-section-content {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+    
+    .result-card {
+        padding: 15px;
+    }
+    
+    .result-label {
+        font-size: 0.85rem;
+    }
+    
+    .result-value {
+        font-size: 1.3rem;
+    }
+    
+    /* 表格横向滚动优化 */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* 触摸优化 */
+    input[type="number"] {
+        font-size: 16px; /* 防止iOS缩放 */
+    }
+    
+    /* 政策信息小屏优化 */
+    .info-header {
+        font-size: 1.2rem;
+    }
+    
+    .info-content ul li {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    
+    /* 提前还款结果卡片优化 */
+    #prepayment-results .result-value {
+        font-size: 1.2rem;
     }
 }
 
@@ -372,7 +585,8 @@ footer {
     footer,
     .btn-primary,
     .btn-secondary,
-    input[type="range"] {
+    input[type="range"],
+    .info-section {
         display: none;
     }
     
@@ -389,5 +603,242 @@ footer {
     .schedule-section {
         box-shadow: none;
         page-break-inside: avoid;
+    }
+}
+
+/* 政策信息模块样式 */
+.info-section-content {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.info-container {
+    /* 容器样式，与section保持一致 */
+}
+
+.info-header {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 15px;
+}
+
+.info-item {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.info-title:hover {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
+    color: white;
+}
+
+.info-title.active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
+    color: white;
+    border-bottom: none;
+}
+
+.info-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.expand-icon {
+    margin-left: auto;
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.info-title.active .expand-icon {
+    transform: rotate(180deg);
+}
+
+.info-content {
+    display: none;
+    padding: 18px;
+    background: var(--surface);
+    line-height: 1.7;
+}
+
+.info-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-content ul li {
+    padding: 11px 14px;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.info-content ul li strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.policy-section {
+    margin-bottom: 18px;
+}
+
+.policy-section:last-child {
+    margin-bottom: 0;
+}
+
+.policy-section h4 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+}
+
+.policy-note {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    padding: 11px 14px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #92400e;
+    font-weight: 500;
+}
+
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-list li {
+    margin-bottom: 10px;
+}
+
+.links-list a {
+    display: block;
+    padding: 13px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.links-list a:hover {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+.links-list a::before {
+    content: "🔗 ";
+    margin-right: 8px;
+}
+
+/* 滚动条美化 */
+.info-section-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.info-section-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.info-section-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.info-section-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 提前还款结果样式 */
+#prepayment-results {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 提前还款选项区域 */
+#prepayment-options {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .info-container {
+        padding: 20px;
+    }
+    
+    .info-header {
+        font-size: 1.4rem;
+    }
+    
+    .info-title {
+        font-size: 1rem;
+        padding: 15px;
+    }
+    
+    .info-content {
+        padding: 15px;
+    }
+    
+    .info-content ul li {
+        font-size: 0.9rem;
+        padding: 10px 12px;
     }
 }
