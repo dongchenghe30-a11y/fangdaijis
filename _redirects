@@ -1,9 +1,0 @@
-# 静态文件直接返回（不重定向）
-/ads.txt  /ads.txt 200
-/Ads.txt  /ads.txt 200
-/favicon.ico  /favicon.ico 200
-/styles.css  /styles.css 200
-/script.js  /script.js 200
-
-# 所有其他请求返回 index.html（SPA 路由）
-/*  /index.html 200
