@@ -1,0 +1,4 @@
+# 静态文件直接返回
+/ads.txt /ads.txt 200
+/Ads.txt /ads.txt 200
+/favicon.ico /favicon.ico 200
