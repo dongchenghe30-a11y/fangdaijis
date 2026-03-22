@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ Favicon ═══ -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.ico" />
+
+  <!-- ═══ SEO Meta Tags ═══ -->
+  <title id="meta-title">全球房贷计算器 | 免费房贷月供计算 - 中国、美国、香港、英国、新加坡、日本、澳大利亚、加拿大、韩国、德国、法国、阿联酋</title>
+  <meta id="meta-desc" name="description" content="免费全球房贷计算器，覆盖中国（LPR 3.95%）、美国（SOFR 7.2%）、香港（HIBOR 4.625%）、英国（BOE 5.49%）、新加坡（SORA 3.75%）、日本（Flat35）、澳大利亚（RBA）、加拿大（BoC）、韩国、德国、法国、阿联酋（迪拜）12大市场。支持等额本息/等额本金、双周还款、提前还款模拟，一键生成完整还款计划表（Amortization Schedule）。" />
+  <meta name="keywords" content="房贷计算器,mortgage calculator,按揭计算器,房贷月供计算,贷款计算器,等额本息,等额本金,提前还款计算,双周还款,全球房贷,中国房贷LPR,美国房贷30年固定,香港按揭HIBOR,英国房贷BOE,新加坡SORA,日本Flat35,澳大利亚RBA,加拿大BoC,韩国房贷,德国房贷ECB,法国房贷,迪拜房贷EIBOR,阿联酋房贷,home loan calculator,mortgage repayment calculator,amortization schedule,home loan calculator Australia,Canada mortgage calculator,UK mortgage calculator,Singapore home loan,Japan mortgage rate,Dubai mortgage calculator,Germany mortgage calculator" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Global Mortgage Calculator" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="canonical" href="https://mortgage-calc.example.com/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://mortgage-calc.example.com/?lang=zh" />
+  <link rel="alternate" hreflang="zh-HK" href="https://mortgage-calc.example.com/?lang=zh" />
+  <link rel="alternate" hreflang="en-US" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="en-GB" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="en-AU" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="en-CA" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="en-SG" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="ko" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="ja" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="de" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="fr" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="ar" href="https://mortgage-calc.example.com/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://mortgage-calc.example.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="全球房贷计算器 / Global Mortgage Calculator" />
+  <meta id="og-title" property="og:title" content="全球房贷计算器 — 12大市场免费房贷月供计算" />
+  <meta id="og-desc" property="og:description" content="精确计算全球12大市场（中国/美国/香港/英国/新加坡/日本/澳大利亚/加拿大/韩国/德国/法国/阿联酋）房贷月供、总利息及完整还款计划，支持提前还款节省分析。免费使用，无需注册。" />
+  <meta property="og:image" content="https://mortgage-calc.example.com/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://mortgage-calc.example.com/" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_AU" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta id="tw-title" name="twitter:title" content="全球房贷计算器 — 12大市场" />
+  <meta id="tw-desc" name="twitter:description" content="免费计算中国LPR、美国SOFR、香港HIBOR、英国BOE、新加坡SORA、日本Flat35、澳大利亚RBA、加拿大BoC、韩国BOK、德国/法国ECB、阿联酋EIBOR房贷月供及还款计划。" />
+  <meta name="twitter:image" content="https://mortgage-calc.example.com/og-cover.png" />
+  <meta name="twitter:site" content="@mortgagecalc" />
+
+  <!-- Schema.org: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "全球房贷计算器 / Global Mortgage Calculator",
+    "alternateName": ["房贷计算器", "按揭计算器", "Mortgage Calculator", "Home Loan Calculator"],
+    "url": "https://mortgage-calc.example.com/",
+    "description": "Free global mortgage calculator for 12 markets: China (LPR), USA (SOFR), Hong Kong (HIBOR), UK (BOE), Singapore (SORA), Japan (Flat35), Australia (RBA), Canada (BoC), South Korea (BOK), Germany (ECB), France (ECB), UAE (EIBOR). Supports equal installment, equal principal, bi-weekly payments, prepayment simulation and full amortization schedule.",
+    "applicationCategory": "FinanceApplication",
+    "applicationSubCategory": "Mortgage Calculator",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "inLanguage": ["zh-CN", "en-US", "en-GB", "en-AU"],
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Home buyers, Real estate investors, Financial planners"
+    },
+    "featureList": [
+      "等额本息计算 / Equal Installment Calculation",
+      "等额本金计算 / Equal Principal Calculation",
+      "双周还款模拟 / Bi-Weekly Payment Simulation",
+      "提前还款模拟 / Prepayment Simulation",
+      "完整还款计划表 / Full Amortization Schedule",
+      "12国货币支持 / 12 Currency Support",
+      "实时汇率转换 / Live Exchange Rate",
+      "CSV导出 / CSV Export"
+    ],
+    "screenshot": "https://mortgage-calc.example.com/og-cover.png",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-03-22"
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "等额本息和等额本金有什么区别？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "等额本息每月还款固定，前期利息占比高；等额本金每月本金固定、利息递减，总利息较少但前期月供较高，适合有资金积累的借款人。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Equal Installment and Equal Principal mortgage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Equal Installment (annuity) keeps monthly payments fixed with more interest paid early. Equal Principal fixes the principal repayment each period with decreasing interest — resulting in lower total interest but higher initial payments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "中国房贷LPR是什么利率？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LPR（贷款市场报价利率）是中国银行间贷款基准利率，由中国人民银行每月公布。5年期LPR当前为3.95%，是大多数住房贷款的定价基准。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Australia's mortgage calculator work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Australian mortgages track the RBA cash rate. Variable rate loans are most common. Foreign buyers need FIRB approval. The Big Four banks (CBA, Westpac, ANZ, NAB) dominate the market. Current typical variable rate is around 6.49%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can foreigners get a mortgage in Dubai/UAE?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, foreigners can buy freehold property in designated zones in Dubai and Abu Dhabi. Minimum down payment is 25% for non-residents. There is no income tax or capital gains tax in the UAE. Current EIBOR-based mortgage rates are around 7.8%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "加拿大房贷压力测试是什么？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "加拿大要求所有借款人通过压力测试，以贷款利率+2%或5.25%（取较高者）测试还款能力，确保利率上升时借款人仍可负担。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页 / Home", "item": "https://mortgage-calc.example.com/" },
+      { "@type": "ListItem", "position": 2, "name": "房贷计算器 / Mortgage Calculator", "item": "https://mortgage-calc.example.com/" }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#eff6ff', 100:'#dbeafe', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8' },
+          },
+          fontFamily: { sans: ['"Inter"','system-ui','sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { box-sizing: border-box; }
+    body { background: #f8fafc; color: #1e293b; font-family: 'Inter', sans-serif; }
+
+    .input-field {
+      background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      color: #1e293b; padding: 10px 14px; width: 100%; font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+    }
+    .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
+    .input-field option { background: #ffffff; color: #1e293b; }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .big-number {
+      font-size: 2.6rem; font-weight: 700;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: white; border: none; border-radius: 10px; padding: 13px 28px;
+      font-weight: 600; font-size: 15px; cursor: pointer; width: 100%;
+      transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+    }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(59,130,246,0.35); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+      border-radius: 10px; padding: 13px 20px; font-weight: 500; cursor: pointer;
+      transition: background 0.2s; font-size: 14px;
+    }
+    .btn-secondary:hover { background: #e2e8f0; color: #1e293b; }
+
+    .tab-btn {
+      padding: 6px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      cursor: pointer; border: none; background: transparent; color: #94a3b8;
+      transition: all 0.2s;
+    }
+    .tab-btn.active { background: #3b82f6; color: white; }
+
+    .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .schedule-table th {
+      background: #f8fafc; color: #64748b; font-weight: 600;
+      padding: 10px 12px; text-align: right; position: sticky; top: 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .schedule-table th:first-child { text-align: center; }
+    .schedule-table td { padding: 9px 12px; text-align: right; border-bottom: 1px solid #f1f5f9; }
+    .schedule-table td:first-child { text-align: center; color: #94a3b8; }
+    .schedule-table tr:hover td { background: #f8fafc; }
+
+    .rate-chip {
+      background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px;
+      padding: 4px 12px; font-size: 12px; white-space: nowrap;
+    }
+
+    .country-btn {
+      padding: 6px 12px; border-radius: 10px; border: 1.5px solid #e2e8f0;
+      background: #ffffff; color: #475569; cursor: pointer; font-size: 12px;
+      transition: all 0.2s; font-weight: 500;
+    }
+    .country-btn:hover {
+      border-color: #3b82f6; background: #eff6ff; color: #2563eb;
+    }
+    .country-btn.active {
+      border-color: #3b82f6; background: #eff6ff; color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .fade-in { animation: fadeIn 0.35s ease forwards; }
+
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-question {
+      cursor: pointer; padding: 16px 0; display: flex;
+      justify-content: space-between; align-items: center;
+      font-weight: 500; color: #1e293b;
+    }
+    .faq-answer { color: #64748b; font-size: 14px; line-height: 1.75; padding-bottom: 16px; display: none; }
+    .faq-answer.open { display: block; }
+
+    /* SEO 描述区 */
+    .country-desc-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px; padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .country-desc-card:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 4px 16px rgba(59,130,246,0.1);
+      transform: translateY(-2px);
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* 导航栏 */
+    nav { background: rgba(255,255,255,0.95); border-bottom: 1px solid #e2e8f0; }
+    .lang-switcher { background: #f1f5f9; border-radius: 10px; padding: 3px; }
+
+    @media (max-width: 1024px) {
+      .main-grid { flex-direction: column; }
+      .left-panel, .right-panel { width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ 顶部导航 ═══════════ -->
+<nav class="sticky top-0 z-50" style="backdrop-filter:blur(12px);">
+  <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span style="font-size:1.5rem;">🏠</span>
+      <span class="font-bold text-slate-800 text-base" data-i18n="nav.title">全球房贷计算器</span>
+    </div>
+    <div class="lang-switcher flex items-center gap-1">
+      <button onclick="setLang('zh-CN')" id="lang-zh" class="tab-btn active">中文</button>
+      <button onclick="setLang('en')" id="lang-en" class="tab-btn">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ 汇率工具栏 ═══════════ -->
+<div style="background:#f1f5f9;border-bottom:1px solid #e2e8f0;overflow-x:auto;">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center gap-3">
+    <span class="text-xs text-slate-400 shrink-0 font-medium" data-i18n="exchange.live_rates">实时汇率</span>
+    <div id="rate-chips" class="flex gap-2">
+      <span class="rate-chip text-slate-400" data-i18n="exchange.loading">加载中...</span>
+    </div>
+    <span class="text-xs text-slate-400 shrink-0 ml-auto hidden sm:block" data-i18n="exchange.base_usd">基准: USD</span>
+  </div>
+</div>
+
+<!-- ═══════════ SEO Hero 区域 ═══════════ -->
+<div style="background:linear-gradient(135deg,#eff6ff 0%,#f5f3ff 50%,#faf5ff 100%);border-bottom:1px solid #e2e8f0;">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-slate-800" data-i18n="hero.h1">全球房贷计算器</h1>
+    <p class="text-slate-500 text-sm mt-2 leading-relaxed max-w-3xl" data-i18n="hero.sub">
+      覆盖中国（LPR）、美国（SOFR）、中国香港（HIBOR）、英国（BOE）、新加坡（SORA）、日本（Flat35）、澳大利亚（RBA）、加拿大（BoC）、韩国（BOK）、德国（ECB）、法国（ECB）、阿联酋（EIBOR）12大市场，
+      支持等额本息 / 等额本金、双周还款、提前还款模拟，精准输出完整还款计划表。
+    </p>
+    <!-- 国家数量徽章 -->
+    <div class="flex flex-wrap gap-2 mt-4">
+      <span class="inline-flex items-center gap-1 bg-white border border-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">🌏 12 Markets / 12大市场</span>
+      <span class="inline-flex items-center gap-1 bg-white border border-purple-100 text-purple-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">📊 Amortization Schedule / 还款计划表</span>
+      <span class="inline-flex items-center gap-1 bg-white border border-green-100 text-green-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">💰 Prepayment Saving / 提前还款节省</span>
+      <span class="inline-flex items-center gap-1 bg-white border border-orange-100 text-orange-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">🔄 Bi-Weekly / 双周还款</span>
+      <span class="inline-flex items-center gap-1 bg-white border border-emerald-100 text-emerald-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">✅ Free / 完全免费</span>
+      <span class="inline-flex items-center gap-1 bg-white border border-rose-100 text-rose-600 text-xs font-medium px-3 py-1 rounded-full shadow-sm">💱 Live FX Rates / 实时汇率</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SEO 国家快速入口（语义化关键词） ═══════════ -->
+<!-- 此区域主要用于搜索引擎索引各国关键词，视觉上融入页面 -->
+<div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;">
+  <div class="max-w-7xl mx-auto px-4 py-3">
+    <p class="text-xs text-slate-400 leading-relaxed hidden" aria-hidden="false" id="seo-keywords-block">
+      本工具支持：中国房贷计算（LPR利率，工商银行/建设银行/农业银行）| 美国房贷计算（mortgage calculator USA，30-year fixed rate，FHA loan，VA loan）| 香港按揭计算（H计划，HIBOR，汇丰银行，中银香港）| 英国房贷计算（UK mortgage calculator，Bank of England rate，Help to Buy，Stamp Duty）| 新加坡房贷计算（HDB loan，SORA，DBS，OCBC，UOB）| 日本住宅ローン計算（Flat35，三菱UFJ）| Australia home loan calculator（RBA cash rate，CBA，Westpac，ANZ，NAB，FIRB）| Canada mortgage calculator（Bank of Canada，CMHC，stress test，TD，RBC）| 한국 주택담보대출 계산기（KB국민은행，신한은행）| Hypothekenrechner Deutschland（Deutsche Bank，Commerzbank，EZB）| Calculateur hypothèque France（BNP Paribas，Crédit Agricole，taux d'usure）| Dubai mortgage calculator UAE（EIBOR，Emirates NBD，Mashreq，freehold zone）
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════ 主体双栏布局 ═══════════ -->
+<main class="max-w-7xl mx-auto px-4 py-6">
+  <div class="flex gap-6 main-grid">
+
+    <!-- ══ 左侧：输入面板 ══ -->
+    <div class="left-panel" style="width:420px;flex-shrink:0;">
+
+      <!-- 国家选择 -->
+      <div class="card mb-4">
+        <h2 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider" data-i18n="input.country">选择国家/地区</h2>
+        <div class="flex flex-wrap gap-2" id="country-btn-group">
+          <button class="country-btn active" onclick="selectCountry('CN')" id="btn-CN">🇨🇳 <span data-i18n="countries.CN">中国</span></button>
+          <button class="country-btn" onclick="selectCountry('US')" id="btn-US">🇺🇸 <span data-i18n="countries.US">美国</span></button>
+          <button class="country-btn" onclick="selectCountry('HK')" id="btn-HK">🇭🇰 <span data-i18n="countries.HK">香港</span></button>
+          <button class="country-btn" onclick="selectCountry('GB')" id="btn-GB">🇬🇧 <span data-i18n="countries.GB">英国</span></button>
+          <button class="country-btn" onclick="selectCountry('SG')" id="btn-SG">🇸🇬 <span data-i18n="countries.SG">新加坡</span></button>
+          <button class="country-btn" onclick="selectCountry('JP')" id="btn-JP">🇯🇵 <span data-i18n="countries.JP">日本</span></button>
+          <button class="country-btn" onclick="selectCountry('AU')" id="btn-AU">🇦🇺 <span data-i18n="countries.AU">澳大利亚</span></button>
+          <button class="country-btn" onclick="selectCountry('CA')" id="btn-CA">🇨🇦 <span data-i18n="countries.CA">加拿大</span></button>
+          <button class="country-btn" onclick="selectCountry('KR')" id="btn-KR">🇰🇷 <span data-i18n="countries.KR">韩国</span></button>
+          <button class="country-btn" onclick="selectCountry('DE')" id="btn-DE">🇩🇪 <span data-i18n="countries.DE">德国</span></button>
+          <button class="country-btn" onclick="selectCountry('FR')" id="btn-FR">🇫🇷 <span data-i18n="countries.FR">法国</span></button>
+          <button class="country-btn" onclick="selectCountry('AE')" id="btn-AE">🇦🇪 <span data-i18n="countries.AE">阿联酋</span></button>
+        </div>
+        <!-- 当前国家利率提示 -->
+        <div class="mt-3 text-xs text-slate-400 flex items-center gap-2 bg-blue-50 rounded-lg px-3 py-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+          <span id="hint-text">当前默认利率：3.95%（LPR，中国人民银行）</span>
+        </div>
+      </div>
+
+      <!-- 基础参数 -->
+      <div class="card mb-4">
+        <h2 class="text-xs font-semibold text-slate-400 mb-4 uppercase tracking-wider" data-i18n="input.title">贷款参数</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.loan_amount">贷款金额</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium" id="currency-symbol">¥</span>
+              <input type="number" id="loan_amount" class="input-field pl-8" value="1000000" min="1" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.annual_rate">年利率 (%)</label>
+              <input type="number" id="annual_rate" class="input-field" value="3.95" step="0.01" min="0.01" max="30" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.loan_years">贷款年限（年）</label>
+              <input type="number" id="loan_years" class="input-field" value="30" min="1" max="50" />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.repayment_method">还款方式</label>
+            <select id="repayment_method" class="input-field">
+              <option value="equal_installment" data-i18n-opt="input.equal_installment">等额本息（每月固定）</option>
+              <option value="equal_principal" data-i18n-opt="input.equal_principal">等额本金（本金固定，利息递减）</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.payment_frequency">还款频率</label>
+            <select id="payment_frequency" class="input-field">
+              <option value="monthly" data-i18n-opt="input.monthly">按月还款（每月一次）</option>
+              <option value="biweekly" data-i18n-opt="input.biweekly">双周还款（每两周一次）</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提前还款 -->
+      <div class="card mb-4">
+        <h2 class="text-xs font-semibold text-slate-400 mb-4 uppercase tracking-wider" data-i18n="input.prepayment_title">提前还款（可选）</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs text-slate-500 mb-1.5 block font-medium" data-i18n="input.monthly_extra">每月额外还款</label>
+            <input type="number" id="monthly_extra" class="input-field" value="0" min="0" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-500 mb-2 block font-medium" data-i18n="input.lump_sum">一次性大额还款</label>
+            <div id="lump-sum-list" class="space-y-2"></div>
+            <button onclick="addLumpSum()" class="mt-2 text-xs text-blue-500 hover:text-blue-600 flex items-center gap-1 font-medium">
+              <span>+</span> <span data-i18n="input.add_lump_sum">添加一次性还款</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="flex gap-3">
+        <button class="btn-primary" onclick="calculate()" data-i18n="input.calculate">立即计算</button>
+        <button class="btn-secondary" onclick="resetForm()" data-i18n="input.reset">重置</button>
+      </div>
+    </div>
+
+    <!-- ══ 右侧：结果面板 ══ -->
+    <div class="right-panel flex-1 min-w-0">
+
+      <!-- 空状态 -->
+      <div id="empty-state" class="card flex flex-col items-center justify-center py-20 text-center">
+        <div style="font-size:3.5rem;line-height:1;" class="mb-4">🏡</div>
+        <p class="text-slate-500 text-base font-medium" data-i18n="result.empty_hint">填写左侧参数，点击「立即计算」</p>
+        <p class="text-slate-400 text-sm mt-1" data-i18n="result.empty_sub">获取月供、总利息及完整还款计划</p>
+      </div>
+
+      <!-- 结果区域 -->
+      <div id="result-area" class="hidden space-y-5">
+
+        <!-- 核心数字卡片 -->
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div class="stat-card text-center col-span-2" style="background:linear-gradient(135deg,#eff6ff,#f5f3ff);border-color:#bfdbfe;">
+            <p class="text-xs text-blue-500 mb-1 font-semibold uppercase tracking-wider" data-i18n="result.monthly_payment">月供</p>
+            <p class="big-number" id="r-monthly">-</p>
+            <p class="text-xs text-slate-400 mt-1" id="r-currency-label">CNY / 月</p>
+          </div>
+          <div class="stat-card text-center">
+            <p class="text-xs text-slate-400 mb-1 font-medium" data-i18n="result.total_payment">总还款额</p>
+            <p class="text-xl font-bold text-slate-700" id="r-total">-</p>
+          </div>
+          <div class="stat-card text-center">
+            <p class="text-xs text-slate-400 mb-1 font-medium" data-i18n="result.total_interest">总利息</p>
+            <p class="text-xl font-bold text-amber-500" id="r-interest">-</p>
+          </div>
+          <div class="stat-card text-center">
+            <p class="text-xs text-slate-400 mb-1 font-medium" data-i18n="result.actual_periods">实际还款期</p>
+            <p class="text-xl font-bold text-slate-700" id="r-periods">-</p>
+          </div>
+          <div class="stat-card text-center">
+            <p class="text-xs text-slate-400 mb-1 font-medium" data-i18n="result.interest_saved">节省利息</p>
+            <p class="text-xl font-bold text-emerald-500" id="r-saved">-</p>
+          </div>
+        </div>
+
+        <!-- 图表区域 -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="card">
+            <h2 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider" data-i18n="chart.pie_title">本金与利息占比</h2>
+            <div style="height:200px;position:relative;"><canvas id="pieChart"></canvas></div>
+          </div>
+          <div class="card">
+            <h2 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider" data-i18n="chart.line_title">剩余本金走势</h2>
+            <div style="height:200px;position:relative;"><canvas id="lineChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- 还款计划表 -->
+        <div class="card">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold text-slate-700" data-i18n="result.schedule_title">还款计划表</h2>
+            <div class="flex gap-2">
+              <button onclick="downloadCSV()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg transition-colors font-medium" data-i18n="result.download_csv">⬇ CSV</button>
+              <button onclick="toggleFullSchedule()" id="toggle-btn" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1.5 rounded-lg transition-colors font-medium" data-i18n="result.show_all">查看全部</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto rounded-lg" style="max-height:400px;overflow-y:auto;border:1px solid #f1f5f9;">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th data-i18n="result.col_period">期次</th>
+                  <th data-i18n="result.col_payment">还款额</th>
+                  <th data-i18n="result.col_principal">本金</th>
+                  <th data-i18n="result.col_interest">利息</th>
+                  <th data-i18n="result.col_extra">额外还款</th>
+                  <th data-i18n="result.col_balance">剩余本金</th>
+                </tr>
+              </thead>
+              <tbody id="schedule-body"></tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-400 mt-2" id="schedule-note"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════ SEO 各国描述区 ═══════════ -->
+<section style="background:#f8fafc;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;" class="py-12">
+  <div class="max-w-7xl mx-auto px-4">
+    <header class="mb-8">
+      <h2 class="text-xl font-bold text-slate-800 mb-2" data-i18n="seo.section_title">全球主要市场房贷指南</h2>
+      <p class="text-slate-400 text-sm" data-i18n="seo.section_sub">点击任意国家卡片可自动填入该市场默认利率和年限</p>
+    </header>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="country-desc-grid">
+      <!-- 由 JS 填充 -->
+    </div>
+
+    <!-- 额外 SEO 说明文字区 -->
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl border border-blue-100 p-6">
+        <h3 class="text-sm font-bold text-slate-700 mb-3" data-i18n="seo.why_title">为什么使用全球房贷计算器？</h3>
+        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="seo.why_body">无论您是中国买房者关注LPR利率变化，还是海外华人在澳大利亚、加拿大、英国、新加坡置业，或是在迪拜（阿联酋）投资房产，本工具均可精确计算月供、总利息和完整还款计划表（Amortization Schedule）。支持等额本息（Annuity Mortgage）和等额本金（Linear Mortgage）两种主流还款方式，以及双周还款（Bi-Weekly Payment）和提前还款（Prepayment）模拟。</p>
+      </div>
+      <div class="bg-white rounded-2xl border border-purple-100 p-6">
+        <h3 class="text-sm font-bold text-slate-700 mb-3" data-i18n="seo.how_title">如何使用本计算器？</h3>
+        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="seo.how_body">① 点击顶部国家按钮选择目标市场，系统自动填入当地默认利率和年限；② 输入贷款金额、调整利率和年限；③ 可选填每月额外还款或一次性大额还款来模拟提前还款效果；④ 点击「立即计算」，即可查看月供大字展示、本金利息占比饼图、剩余本金折线图及完整逐月还款计划表，并可一键导出 CSV。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ 区域 ═══════════ -->
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-xl font-bold text-slate-800 mb-6" data-i18n="faq.title">房贷知识问答</h2>
+  <div class="card" id="faq-container"></div>
+</section>
+
+<!-- ═══════════ 免责声明 ═══════════ -->
+<section style="background:#f8fafc;border-top:1px solid #e2e8f0;">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <p class="text-xs text-slate-400 leading-relaxed">
+      <strong class="text-slate-500" data-i18n="disclaimer.title">免责声明：</strong>
+      <span data-i18n="disclaimer.content">本计算器提供的所有计算结果仅供参考，不构成任何财务建议或贷款承诺。实际贷款利率、还款金额及税费可能因银行政策、个人信用状况、地区差异及市场变化而有所不同。在做出任何贷款决策前，请咨询持牌金融机构或专业理财顾问。汇率数据为近似值，实际汇率以各银行或权威机构公布为准。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ 页脚 ═══════════ -->
+<footer style="background:#ffffff;border-top:1px solid #e2e8f0;" class="py-6 text-center">
+  <p class="text-slate-400 text-xs" data-i18n="footer.copyright">© 2024 全球房贷计算器 · 仅供参考使用</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════
+     JavaScript 逻辑
+══════════════════════════════════════════════════ -->
+<script>
+// ────────────────────────────────────────────────────────
+// i18n 字典（完整中英双语）
+// ────────────────────────────────────────────────────────
+const I18N = {
+  'zh-CN': {
+    'nav.title': '全球房贷计算器',
+    'exchange.live_rates': '实时汇率',
+    'exchange.loading': '加载中...',
+    'exchange.base_usd': '基准: USD',
+    'hero.h1': '全球房贷计算器',
+    'hero.sub': '覆盖中国（LPR）、美国（SOFR）、中国香港（HIBOR）、英国（BOE）、新加坡（SORA）、日本（Flat35）、澳大利亚（RBA）、加拿大（BoC）、韩国（BOK）、德国（ECB）、法国（ECB）、阿联酋（EIBOR）12大市场，支持等额本息 / 等额本金、双周还款、提前还款模拟。',
+    'input.country': '选择国家/地区',
+    'input.title': '贷款参数',
+    'input.loan_amount': '贷款金额',
+    'input.annual_rate': '年利率 (%)',
+    'input.loan_years': '贷款年限（年）',
+    'input.repayment_method': '还款方式',
+    'input.equal_installment': '等额本息（每月固定）',
+    'input.equal_principal': '等额本金（本金固定，利息递减）',
+    'input.payment_frequency': '还款频率',
+    'input.monthly': '按月还款（每月一次）',
+    'input.biweekly': '双周还款（每两周一次）',
+    'input.prepayment_title': '提前还款（可选）',
+    'input.monthly_extra': '每月额外还款',
+    'input.lump_sum': '一次性大额还款',
+    'input.add_lump_sum': '添加一次性还款',
+    'input.calculate': '立即计算',
+    'input.reset': '重置',
+    'input.lump_month_placeholder': '月份',
+    'input.lump_amount_placeholder': '金额',
+    'result.monthly_payment': '月供',
+    'result.total_payment': '总还款额',
+    'result.total_interest': '总利息',
+    'result.actual_periods': '实际还款期',
+    'result.interest_saved': '节省利息',
+    'result.empty_hint': '填写左侧参数，点击「立即计算」',
+    'result.empty_sub': '获取月供、总利息及完整还款计划',
+    'result.schedule_title': '还款计划表',
+    'result.download_csv': '⬇ CSV',
+    'result.show_all': '查看全部',
+    'result.collapse': '收起',
+    'result.col_period': '期次',
+    'result.col_payment': '还款额',
+    'result.col_principal': '本金',
+    'result.col_interest': '利息',
+    'result.col_extra': '额外还款',
+    'result.col_balance': '剩余本金',
+    'result.per_period': '期',
+    'result.currency_month': '/ 月',
+    'result.note_showing': '显示前 {n} 期，共 {total} 期',
+    'result.note_total': '共 {total} 期',
+    'chart.pie_title': '本金与利息占比',
+    'chart.line_title': '剩余本金走势',
+    'chart.principal': '本金',
+    'chart.interest': '利息',
+    'chart.balance_label': '剩余本金',
+    'chart.period_label': '第{n}期',
+    'chart.y_unit': '万',
+    'countries.CN': '中国',
+    'countries.US': '美国',
+    'countries.HK': '香港',
+    'countries.GB': '英国',
+    'countries.SG': '新加坡',
+    'countries.JP': '日本',
+    'countries.AU': '澳大利亚',
+    'countries.CA': '加拿大',
+    'countries.KR': '韩国',
+    'countries.DE': '德国',
+    'countries.FR': '法国',
+    'countries.AE': '阿联酋',
+    'seo.section_title': '全球主要市场房贷指南',
+    'seo.section_sub': '点击任意国家卡片可自动填入该市场默认利率和年限',
+    'seo.why_title': '为什么使用全球房贷计算器？',
+    'seo.why_body': '无论您是中国买房者关注LPR利率变化，还是海外华人在澳大利亚、加拿大、英国、新加坡置业，或是在迪拜（阿联酋）投资房产，本工具均可精确计算月供、总利息和完整还款计划表。支持等额本息和等额本金两种主流还款方式，以及双周还款和提前还款模拟。',
+    'seo.how_title': '如何使用本计算器？',
+    'seo.how_body': '① 点击国家按钮选择目标市场，系统自动填入当地默认利率；② 输入贷款金额、利率和年限；③ 可选填提前还款金额；④ 点击「立即计算」查看月供、图表及完整还款计划，并可导出 CSV。',
+    'faq.title': '房贷知识问答',
+    'disclaimer.title': '免责声明：',
+    'disclaimer.content': '本计算器提供的所有计算结果仅供参考，不构成任何财务建议或贷款承诺。实际贷款利率、还款金额及税费可能因银行政策、个人信用状况、地区差异及市场变化而有所不同。在做出任何贷款决策前，请咨询持牌金融机构或专业理财顾问。汇率数据为近似值，实际汇率以各银行或权威机构公布为准。',
+    'footer.copyright': '© 2025 全球房贷计算器 · 仅供参考使用',
+    'alert.invalid': '请填写有效的贷款参数（金额、利率、年限均须大于0）',
+  },
+  'en': {
+    'nav.title': 'Global Mortgage Calculator',
+    'exchange.live_rates': 'Live Rates',
+    'exchange.loading': 'Loading...',
+    'exchange.base_usd': 'Base: USD',
+    'hero.h1': 'Global Mortgage Calculator',
+    'hero.sub': 'Supports 12 markets: China (LPR), United States (SOFR), Hong Kong (HIBOR), United Kingdom (BOE), Singapore (SORA), Japan (Flat35), Australia (RBA), Canada (BoC), South Korea (BOK), Germany (ECB), France (ECB), UAE (EIBOR). Equal installment or equal principal, bi-weekly, prepayment simulation & full amortization schedule.',
+    'input.country': 'Select Country / Region',
+    'input.title': 'Loan Parameters',
+    'input.loan_amount': 'Loan Amount',
+    'input.annual_rate': 'Annual Interest Rate (%)',
+    'input.loan_years': 'Loan Term (Years)',
+    'input.repayment_method': 'Repayment Method',
+    'input.equal_installment': 'Equal Installment (Fixed monthly)',
+    'input.equal_principal': 'Equal Principal (Decreasing interest)',
+    'input.payment_frequency': 'Payment Frequency',
+    'input.monthly': 'Monthly',
+    'input.biweekly': 'Bi-Weekly (Every two weeks)',
+    'input.prepayment_title': 'Prepayment Options (Optional)',
+    'input.monthly_extra': 'Monthly Extra Payment',
+    'input.lump_sum': 'Lump-Sum Prepayment',
+    'input.add_lump_sum': 'Add Lump-Sum Payment',
+    'input.calculate': 'Calculate',
+    'input.reset': 'Reset',
+    'input.lump_month_placeholder': 'Month',
+    'input.lump_amount_placeholder': 'Amount',
+    'result.monthly_payment': 'Monthly Payment',
+    'result.total_payment': 'Total Payment',
+    'result.total_interest': 'Total Interest',
+    'result.actual_periods': 'Actual Periods',
+    'result.interest_saved': 'Interest Saved',
+    'result.empty_hint': 'Fill in parameters and click "Calculate"',
+    'result.empty_sub': 'Get monthly payment, total interest and full amortization schedule',
+    'result.schedule_title': 'Amortization Schedule',
+    'result.download_csv': '⬇ CSV',
+    'result.show_all': 'Show All',
+    'result.collapse': 'Collapse',
+    'result.col_period': 'Period',
+    'result.col_payment': 'Payment',
+    'result.col_principal': 'Principal',
+    'result.col_interest': 'Interest',
+    'result.col_extra': 'Extra',
+    'result.col_balance': 'Balance',
+    'result.per_period': '',
+    'result.currency_month': '/ mo',
+    'result.note_showing': 'Showing {n} of {total} periods',
+    'result.note_total': 'Total {total} periods',
+    'chart.pie_title': 'Principal vs. Interest',
+    'chart.line_title': 'Remaining Balance',
+    'chart.principal': 'Principal',
+    'chart.interest': 'Interest',
+    'chart.balance_label': 'Balance',
+    'chart.period_label': 'Period {n}',
+    'chart.y_unit': 'K',
+    'countries.CN': 'China',
+    'countries.US': 'United States',
+    'countries.HK': 'Hong Kong',
+    'countries.GB': 'United Kingdom',
+    'countries.SG': 'Singapore',
+    'countries.JP': 'Japan',
+    'countries.AU': 'Australia',
+    'countries.CA': 'Canada',
+    'countries.KR': 'South Korea',
+    'countries.DE': 'Germany',
+    'countries.FR': 'France',
+    'countries.AE': 'UAE',
+    'seo.section_title': 'Global Mortgage Market Guide',
+    'seo.section_sub': 'Click any country card to auto-fill its default rate and term',
+    'seo.why_title': 'Why use this Global Mortgage Calculator?',
+    'seo.why_body': 'Whether you are a buyer in China tracking LPR changes, an overseas Chinese purchasing property in Australia, Canada, UK, or Singapore, or investing in Dubai (UAE), this tool accurately calculates monthly payment, total interest and a full amortization schedule. Supports Equal Installment (Annuity) and Equal Principal (Linear) repayment methods, bi-weekly payments and prepayment simulation.',
+    'seo.how_title': 'How to use this calculator?',
+    'seo.how_body': '① Click a country button to auto-fill local default rates; ② Enter loan amount, rate and term; ③ Optionally add monthly extra payment or lump-sum prepayment; ④ Click "Calculate" to see monthly payment, charts and full amortization schedule, then export to CSV.',
+    'faq.title': 'Mortgage FAQ',
+    'disclaimer.title': 'Disclaimer: ',
+    'disclaimer.content': 'All results are for informational purposes only and do not constitute financial advice or a loan commitment. Actual rates, payments, and taxes may vary. Consult a licensed financial institution before making decisions. Exchange rates are approximate.',
+    'footer.copyright': '© 2025 Global Mortgage Calculator · For reference only',
+    'alert.invalid': 'Please enter valid loan parameters (amount, rate, and years must be > 0)',
+  }
+};
+
+// ────────────────────────────────────────────────────────
+// 各国 SEO 描述内容（双语）—— 12个国家
+// ────────────────────────────────────────────────────────
+const COUNTRY_DESC = {
+  'zh-CN': [
+    { flag:'🇨🇳', code:'CN', title:'中国房贷 · LPR利率', rate:'3.95%',
+      body:'中国房贷以5年期贷款市场报价利率（LPR）为基准，由中国人民银行每月公布。首套房最低首付20%，商业贷款最长30年。工商银行、建设银行、农业银行是主流选择，公积金组合贷款可享更低利率。' },
+    { flag:'🇺🇸', code:'US', title:'美国房贷 · 30年固定/SOFR', rate:'7.2%',
+      body:'美国以30年固定利率最普遍，参考SOFR基准。FHA贷款首付低至3.5%，VA贷款退伍军人可零首付。Wells Fargo、Chase、Bank of America为主流机构，信用评分对利率影响显著。' },
+    { flag:'🇭🇰', code:'HK', title:'中国香港按揭 · H计划/P计划', rate:'4.625%',
+      body:'香港按揭分H计划（HIBOR+1.5%）与P计划（最优惠利率-2.5%）。外籍买家须额外缴15%印花税。汇丰、中银香港、恒生是主要按揭银行，金管局规定按揭成数上限60%-90%。' },
+    { flag:'🇬🇧', code:'GB', title:'英国房贷 · 英格兰银行利率', rate:'5.49%',
+      body:'英国常见2年或5年固定期，到期转浮动追踪英格兰银行基准利率。Nationwide、Barclays、Halifax为主流机构，Help to Buy政策支持5%首付，印花税（SDLT）分级征收。' },
+    { flag:'🇸🇬', code:'SG', title:'新加坡房贷 · SORA利率', rate:'3.75%',
+      body:'新加坡分HDB贷款（固定2.6%）和银行贷款（浮动SORA）两大类。外籍人士购私宅须缴60%额外买方印花税（ABSD）。DBS、OCBC、UOB是三大银行，贷款额通常不超过房价75%。' },
+    { flag:'🇯🇵', code:'JP', title:'日本房贷 · Flat35/超低利率', rate:'0.375%',
+      body:'日本实行超低利率，变动利率低至0.3%，Flat35（政府担保固定35年）约1.82%。外籍人士通常需永驻资格。三菱UFJ、三井住友是主流银行，首付通常需20%以上。' },
+    { flag:'🇦🇺', code:'AU', title:'澳大利亚房贷 · RBA基准利率', rate:'6.49%',
+      body:'澳大利亚房贷以RBA（澳联储）现金利率为基准，常见浮动利率或1-5年固定期产品。Commonwealth Bank、Westpac、ANZ、NAB为四大银行。外国人购房需申请FIRB批准，印花税按州征收，首次置业者可享豁免。' },
+    { flag:'🇨🇦', code:'CA', title:'加拿大房贷 · 加拿大央行利率', rate:'5.19%',
+      body:'加拿大典型提供5年固定或5年浮动利率，首付20%以上免购房贷款保险（CMHC）。TD Bank、RBC、BMO是主流银行。外国买家须缴纳25%额外转让税（联邦），各省政策不一。房贷压力测试要求通过+2%利率测试。' },
+    { flag:'🇰🇷', code:'KR', title:'韩国房贷 · 韩国银行基准利率', rate:'4.5%',
+      body:'韩国特有全租制度（Jeonse）外，常规按揭分固定与浮动利率，最长30年，贷款价值比（LTV）通常不超过70%。KB Kookmin Bank、Shinhan Bank是主流银行，政府提供多项首次置业补贴政策。' },
+    { flag:'🇩🇪', code:'DE', title:'德国房贷 · 欧洲央行利率', rate:'4.15%',
+      body:'德国房贷利率参考欧洲央行（ECB）基准利率，常见10-15年固定期产品，整体房价较低使购房负担相对合理。Deutsche Bank、Commerzbank、Sparkasse是主流机构，通常需要20%首付，无资本利得税（持有10年以上）。' },
+    { flag:'🇫🇷', code:'FR', title:'法国房贷 · 欧洲央行利率', rate:'3.85%',
+      body:'法国房贷参考ECB利率，以固定利率为主，最长25年。BNP Paribas、Crédit Agricole、Société Générale是主流银行。法国设有严格的贷款成本上限（Taux d\'usure），借款人须通过债务收入比（DTI）不超过35%的审核。' },
+    { flag:'🇦🇪', code:'AE', title:'阿联酋房贷 · EIBOR利率', rate:'7.8%',
+      body:'阿联酋（迪拜/阿布扎比）房贷以EIBOR（迪拜银行同业拆借利率）为基准，浮动利率常见。外国人可购买指定区域房产（自由持有区），首付最低20%（本地人）至25%（外籍）。Emirates NBD、ENBD、Mashreq是主流银行，迪拜房市吸引全球投资者。' },
+  ],
+  'en': [
+    { flag:'🇨🇳', code:'CN', title:'China · LPR Rate', rate:'3.95%',
+      body:'China mortgages are benchmarked to the 5-year Loan Prime Rate (LPR) published monthly by the People\'s Bank of China. Minimum 20% down payment for first homes. ICBC, CCB, and ABC are major lenders. HPF (Housing Provident Fund) combo loans offer additional discounts.' },
+    { flag:'🇺🇸', code:'US', title:'United States · 30-Year Fixed / SOFR', rate:'7.2%',
+      body:'The 30-year fixed-rate mortgage dominates the US market. FHA loans allow 3.5% down for first-time buyers; VA loans offer zero down for veterans. Credit score significantly affects rates from lenders like Wells Fargo, Chase, and Bank of America.' },
+    { flag:'🇭🇰', code:'HK', title:'Hong Kong · H-Plan / P-Plan', rate:'4.625%',
+      body:'Hong Kong offers H-Plan (HIBOR+1.5%) and P-Plan (Prime–2.5%) mortgages. Foreign buyers pay an additional 15% Buyer\'s Stamp Duty. HSBC, BOC HK, and Hang Seng are primary lenders. HKMA caps LTV at 60–90%.' },
+    { flag:'🇬🇧', code:'GB', title:'United Kingdom · Bank of England Rate', rate:'5.49%',
+      body:'UK mortgages feature 2 or 5-year fixed terms, reverting to the BOE tracker rate. Nationwide, Barclays, and Halifax are leading lenders. Help to Buy supports 5% deposits; SDLT is tiered with first-buyer relief.' },
+    { flag:'🇸🇬', code:'SG', title:'Singapore · SORA Rate', rate:'3.75%',
+      body:'Singapore offers HDB loans (fixed 2.6%) and bank loans (SORA-pegged). Foreign buyers of private property pay 60% Additional Buyer\'s Stamp Duty (ABSD). DBS, OCBC, and UOB are major banks with LTV typically capped at 75%.' },
+    { flag:'🇯🇵', code:'JP', title:'Japan · Flat35 / Ultra-Low Rates', rate:'0.375%',
+      body:'Japan\'s ultra-low rates offer variable mortgages from ~0.3% and the government-backed Flat35 fixed product at ~1.82%. Foreign nationals typically need permanent residency. MUFG and SMBC are major lenders; 20%+ down required.' },
+    { flag:'🇦🇺', code:'AU', title:'Australia · RBA Cash Rate', rate:'6.49%',
+      body:'Australian mortgages track the RBA cash rate with variable or 1-5 year fixed options. The Big Four (CBA, Westpac, ANZ, NAB) dominate. Foreign buyers need FIRB approval; stamp duty varies by state with first-home buyer grants available.' },
+    { flag:'🇨🇦', code:'CA', title:'Canada · Bank of Canada Rate', rate:'5.19%',
+      body:'Canada offers 5-year fixed or variable mortgages. 20%+ down avoids mandatory CMHC mortgage insurance. TD, RBC, and BMO are top lenders. Foreign buyers face a 25% federal surtax. All borrowers must pass the stress test at rate + 2%.' },
+    { flag:'🇰🇷', code:'KR', title:'South Korea · Bank of Korea Rate', rate:'4.5%',
+      body:'Beyond South Korea\'s unique Jeonse deposit system, conventional mortgages run up to 30 years with LTV up to 70%. KB Kookmin and Shinhan Bank are leading lenders. Government subsidizes first-home buyers through various programs.' },
+    { flag:'🇩🇪', code:'DE', title:'Germany · ECB Rate', rate:'4.15%',
+      body:'German mortgages reference the ECB rate with typical 10-15 year fixed terms. Relatively affordable housing makes homeownership accessible. Deutsche Bank, Commerzbank, and Sparkasse are major lenders. 20% down is standard; no capital gains tax after 10 years.' },
+    { flag:'🇫🇷', code:'FR', title:'France · ECB Rate', rate:'3.85%',
+      body:'French mortgages use ECB-referenced fixed rates for up to 25 years. BNP Paribas, Crédit Agricole, and SG dominate. A strict usury rate cap protects borrowers; debt-to-income ratio must not exceed 35% of net income.' },
+    { flag:'🇦🇪', code:'AE', title:'UAE / Dubai · EIBOR Rate', rate:'7.8%',
+      body:'UAE mortgages (Dubai/Abu Dhabi) are pegged to EIBOR with floating rates common. Foreigners can buy in freehold zones with 25% minimum down payment. Emirates NBD, ENBD, and Mashreq are top lenders. Dubai\'s property market attracts global investors with no income or capital gains tax.' },
+  ]
+};
+
+// ────────────────────────────────────────────────────────
+// FAQ 数据（双语）—— 扩充版
+// ────────────────────────────────────────────────────────
+const FAQ_DATA = {
+  'zh-CN': [
+    { q:'等额本息和等额本金有什么区别？', a:'等额本息每月还款固定，前期利息占比高；等额本金每月本金固定、利息递减，总利息较少但前期月供较高，适合有资金积累的借款人。' },
+    { q:'提前还款有什么好处？', a:'提前还款减少剩余本金，节省后续利息并缩短年限。以100万、30年、4.2%为例，每月多还1000元可节省约10万元利息，提前约5年还清。' },
+    { q:'双周还款为什么能省利息？', a:'双周还款每年还26次，相当于比月还多还一个月本金，加快本金减少速度，可节省数万元利息并提前1-4年还清。' },
+    { q:'澳大利亚外国人买房有限制吗？', a:'是的，外国人须向FIRB（外国投资审查委员会）申请批准，通常只能购买新建房产。各州印花税不同，维多利亚州对外国买家加征8%印花税附加费。' },
+    { q:'加拿大房贷压力测试是什么？', a:'加拿大要求所有借款人通过"压力测试"，即以贷款利率+2%或5.25%（取较高者）来测试还款能力，确保利率上升时借款人仍可负担。' },
+    { q:'迪拜/阿联酋外国人买房有哪些优势？', a:'阿联酋无个人所得税、无资本利得税，外国人可在自由持有区购置产权房。迪拜房产租金回报率较高（5%-7%），吸引大量全球投资者。首付最低25%，最长还款期25年。' },
+    { q:'德国和法国房贷有什么特点？', a:'德国和法国房贷参考欧洲央行（ECB）利率，以中长期固定利率为主，保障性强。德国无资本利得税（持有超10年），法国有严格的负债率（DTI≤35%）保护借款人，两国首付通常需要20%以上。' },
+  ],
+  'en': [
+    { q:'Equal Installment vs Equal Principal: what\'s the difference?', a:'Equal Installment fixes your monthly payment — more interest early, more principal later. Equal Principal fixes the principal payment with decreasing interest — lower total interest but higher initial payments.' },
+    { q:'How does prepayment save money?', a:'Extra payments reduce outstanding principal, cutting future interest. For a $1M loan at 4.2% over 30 years, $1,000/month extra can save ~$100K in interest and cut ~5 years off the term.' },
+    { q:'Why does bi-weekly payment save interest?', a:'26 bi-weekly payments = 13 monthly equivalents per year. That one extra annual payment accelerates principal paydown, saving tens of thousands and cutting 1-4 years off the mortgage.' },
+    { q:'Can foreigners buy property in Australia?', a:'Foreign buyers must obtain FIRB approval and are generally limited to new properties. Stamp duty varies by state; Victoria charges an 8% foreign buyer surcharge on top of regular stamp duty.' },
+    { q:'What is Canada\'s mortgage stress test?', a:'All Canadian mortgage applicants must qualify at the higher of their contracted rate + 2% or 5.25%. This ensures borrowers can handle rate increases without defaulting.' },
+    { q:'Why do investors choose Dubai / UAE property?', a:'UAE has no income tax, no capital gains tax, and foreigners can own freehold property in designated zones. Dubai rental yields of 5–7% attract global investors. Minimum 25% down; max 25-year term for non-residents.' },
+    { q:'What are key features of German and French mortgages?', a:'Both countries use ECB-referenced rates with medium-to-long fixed terms. Germany has no CGT after 10 years of ownership. France caps debt-to-income at 35% and applies a usury rate ceiling. Both typically require 20%+ down payment.' },
+  ]
+};
+
+// ────────────────────────────────────────────────────────
+// 12个国家预设数据
+// ────────────────────────────────────────────────────────
+const COUNTRY_PRESETS = {
+  CN: { currency:'CNY', symbol:'¥',   rate:3.95,  years:30, hint_zh:'默认利率：3.95%（5年期LPR，中国人民银行）',      hint_en:'Default: 3.95% (5-year LPR, PBoC)' },
+  US: { currency:'USD', symbol:'$',   rate:7.2,   years:30, hint_zh:'默认利率：7.2%（30年固定，参考SOFR）',           hint_en:'Default: 7.2% (30-yr fixed, SOFR-based)' },
+  HK: { currency:'HKD', symbol:'HK$', rate:4.625, years:30, hint_zh:'默认利率：4.625%（H计划，HIBOR+1.5%）',         hint_en:'Default: 4.625% (H-Plan, HIBOR+1.5%)' },
+  GB: { currency:'GBP', symbol:'£',   rate:5.49,  years:25, hint_zh:'默认利率：5.49%（5年固定，BOE基准5.25%）',      hint_en:'Default: 5.49% (5-yr fixed, BOE 5.25%)' },
+  SG: { currency:'SGD', symbol:'S$',  rate:3.75,  years:30, hint_zh:'默认利率：3.75%（银行贷款，参考SORA）',         hint_en:'Default: 3.75% (bank loan, SORA-based)' },
+  JP: { currency:'JPY', symbol:'¥',   rate:0.375, years:35, hint_zh:'默认利率：0.375%（变动利率，日本超低利率）',    hint_en:'Default: 0.375% (variable, BOJ ultra-low)' },
+  AU: { currency:'AUD', symbol:'A$',  rate:6.49,  years:30, hint_zh:'默认利率：6.49%（浮动利率，澳联储RBA）',        hint_en:'Default: 6.49% (variable, RBA cash rate)' },
+  CA: { currency:'CAD', symbol:'C$',  rate:5.19,  years:25, hint_zh:'默认利率：5.19%（5年固定，加拿大央行参考）',   hint_en:'Default: 5.19% (5-yr fixed, BoC-referenced)' },
+  KR: { currency:'KRW', symbol:'₩',   rate:4.5,   years:30, hint_zh:'默认利率：4.5%（混合固定，韩国银行基准）',     hint_en:'Default: 4.5% (blended fixed, BOK-referenced)' },
+  DE: { currency:'EUR', symbol:'€',   rate:4.15,  years:20, hint_zh:'默认利率：4.15%（10年固定，欧洲央行参考）',    hint_en:'Default: 4.15% (10-yr fixed, ECB-referenced)' },
+  FR: { currency:'EUR', symbol:'€',   rate:3.85,  years:20, hint_zh:'默认利率：3.85%（固定利率，欧洲央行参考）',    hint_en:'Default: 3.85% (fixed, ECB-referenced)' },
+  AE: { currency:'AED', symbol:'AED', rate:7.8,   years:25, hint_zh:'默认利率：7.8%（浮动，EIBOR基准，迪拜/阿联酋）', hint_en:'Default: 7.8% (variable, EIBOR, Dubai/UAE)' },
+};
+
+// 静态备用汇率（相对 USD）
+const FALLBACK_RATES = { USD:1, CNY:7.24, HKD:7.82, GBP:0.79, EUR:0.92, JPY:149.5, SGD:1.34, AUD:1.53, CAD:1.36, CHF:0.90, KRW:1325, AED:3.67 };
+
+// ────────────────────────────────────────────────────────
+// 全局状态
+// ────────────────────────────────────────────────────────
+let currentCountry = 'CN';
+let currentLang = 'zh-CN';
+let fullScheduleData = [];
+let showingFull = false;
+let pieChartInst = null;
+let lineChartInst = null;
+let lumpSumCounter = 0;
+let lastCalcData = null;
+
+// ────────────────────────────────────────────────────────
+// 初始化
+// ────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  applyI18n('zh-CN');
+  buildCountryDesc('zh-CN');
+  buildFAQ('zh-CN');
+  loadExchangeRates();
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  if (urlLang === 'en') setLang('en');
+});
+
+// ────────────────────────────────────────────────────────
+// 语言切换
+// ────────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('lang-zh').classList.toggle('active', lang === 'zh-CN');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  applyI18n(lang);
+  buildCountryDesc(lang);
+  buildFAQ(lang);
+  rebuildSelectOptions(lang);
+  updateCountryHint();
+  updateMetaTags(lang);
+  if (lastCalcData) {
+    refreshChartsLabels();
+    refreshScheduleHeaders();
+    refreshResultLabels();
+  }
+}
+
+function t(key) {
+  return (I18N[currentLang] && I18N[currentLang][key]) || (I18N['zh-CN'][key]) || key;
+}
+
+function applyI18n(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = I18N[lang] && I18N[lang][key];
+    if (val !== undefined) el.textContent = val;
+  });
+}
+
+function rebuildSelectOptions(lang) {
+  const rm = document.getElementById('repayment_method');
+  const curRM = rm.value;
+  rm.options[0].text = t('input.equal_installment');
+  rm.options[1].text = t('input.equal_principal');
+  rm.value = curRM;
+
+  const pf = document.getElementById('payment_frequency');
+  const curPF = pf.value;
+  pf.options[0].text = t('input.monthly');
+  pf.options[1].text = t('input.biweekly');
+  pf.value = curPF;
+}
+
+function updateMetaTags(lang) {
+  const titleZH = '全球房贷计算器 - 中国、美国、香港、英国、新加坡、日本、澳大利亚、加拿大、韩国、德国、法国、阿联酋';
+  const titleEN = 'Global Mortgage Calculator - China, USA, HK, UK, Singapore, Japan, Australia, Canada, South Korea, Germany, France, UAE';
+  if (lang === 'en') {
+    document.getElementById('meta-title').textContent = titleEN;
+    document.getElementById('meta-desc').setAttribute('content','Free global mortgage calculator for 12 markets: China (LPR), USA (SOFR), Hong Kong (HIBOR), UK (BOE), Singapore (SORA), Japan (Flat35), Australia (RBA), Canada (BoC), South Korea (BOK), Germany (ECB), France (ECB), UAE (EIBOR). Full amortization schedule, prepayment simulation, bi-weekly payments.');
+    document.getElementById('og-title').setAttribute('content','Global Mortgage Calculator — 12 Markets');
+    document.getElementById('og-desc').setAttribute('content','Accurate mortgage payment calculator with amortization schedule for 12 global markets including China, USA, HK, UK, Singapore, Japan, Australia, Canada, South Korea, Germany, France, UAE.');
+    document.getElementById('tw-title').setAttribute('content','Global Mortgage Calculator');
+    document.getElementById('tw-desc').setAttribute('content','Supports China LPR, US SOFR, HK HIBOR, UK BOE, SG SORA, Japan Flat35, Australia RBA, Canada BoC, South Korea BOK, Germany/France ECB, UAE EIBOR.');
+  } else {
+    document.getElementById('meta-title').textContent = titleZH;
+    document.getElementById('meta-desc').setAttribute('content','免费全球房贷计算器，覆盖中国（LPR）、美国（SOFR）、香港（HIBOR）、英国（BOE）、新加坡（SORA）、日本（Flat35）、澳大利亚（RBA）、加拿大（BoC）、韩国（BOK）、德国、法国（ECB）、阿联酋（EIBOR）12大市场。');
+    document.getElementById('og-title').setAttribute('content','全球房贷计算器 — 12大市场');
+    document.getElementById('og-desc').setAttribute('content','精确计算全球12大市场房贷月供、总利息及完整还款计划，支持提前还款节省分析。');
+    document.getElementById('tw-title').setAttribute('content','全球房贷计算器');
+    document.getElementById('tw-desc').setAttribute('content','支持中国LPR、美国SOFR、香港HIBOR、英国BOE、新加坡SORA、日本Flat35、澳大利亚RBA、加拿大BoC、韩国BOK、德国/法国ECB、阿联酋EIBOR利率。');
+  }
+  document.title = lang === 'en' ? titleEN : titleZH;
+}
+
+// ────────────────────────────────────────────────────────
+// 构建各国 SEO 描述区
+// ────────────────────────────────────────────────────────
+function buildCountryDesc(lang) {
+  const grid = document.getElementById('country-desc-grid');
+  const data = COUNTRY_DESC[lang] || COUNTRY_DESC['zh-CN'];
+  grid.innerHTML = data.map(d => `
+    <article class="country-desc-card" onclick="selectCountry('${d.code}')" role="button" aria-label="${d.title}">
+      <div class="flex items-center gap-2 mb-3">
+        <span style="font-size:1.8rem;line-height:1;">${d.flag}</span>
+        <div>
+          <h3 class="text-sm font-semibold text-slate-800">${d.title}</h3>
+          <span class="text-xs text-blue-500 font-medium">${lang === 'en' ? 'Default Rate' : '默认利率'}: ${d.rate}</span>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 leading-relaxed">${d.body}</p>
+      <div class="mt-3 text-xs text-blue-400 font-medium">
+        → ${lang === 'en' ? 'Click to use this rate' : '点击使用此利率'}
+      </div>
+    </article>
+  `).join('');
+}
+
+// ────────────────────────────────────────────────────────
+// 构建 FAQ
+// ────────────────────────────────────────────────────────
+function buildFAQ(lang) {
+  const container = document.getElementById('faq-container');
+  const data = FAQ_DATA[lang] || FAQ_DATA['zh-CN'];
+  container.innerHTML = data.map((item, i) => `
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(${i})">
+        <span class="text-slate-700">${item.q}</span>
+        <span id="faq-icon-${i}" class="text-slate-400 text-xl shrink-0 ml-4">+</span>
+      </div>
+      <div class="faq-answer" id="faq-ans-${i}">${item.a}</div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(i) {
+  const ans = document.getElementById(`faq-ans-${i}`);
+  const icon = document.getElementById(`faq-icon-${i}`);
+  const isOpen = ans.classList.contains('open');
+  ans.classList.toggle('open', !isOpen);
+  icon.textContent = isOpen ? '+' : '−';
+}
+
+// ────────────────────────────────────────────────────────
+// 国家切换
+// ────────────────────────────────────────────────────────
+function selectCountry(code) {
+  currentCountry = code;
+  document.querySelectorAll('[id^="btn-"]').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`btn-${code}`);
+  if (btn) btn.classList.add('active');
+  const preset = COUNTRY_PRESETS[code];
+  document.getElementById('annual_rate').value = preset.rate;
+  document.getElementById('loan_years').value = preset.years;
+  document.getElementById('currency-symbol').textContent = preset.symbol;
+  updateCountryHint();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateCountryHint() {
+  const preset = COUNTRY_PRESETS[currentCountry];
+  document.getElementById('hint-text').textContent =
+    currentLang === 'en' ? preset.hint_en : preset.hint_zh;
+}
+
+// ────────────────────────────────────────────────────────
+// 提前还款管理
+// ────────────────────────────────────────────────────────
+function addLumpSum() {
+  lumpSumCounter++;
+  const id = `lump-${lumpSumCounter}`;
+  const div = document.createElement('div');
+  div.id = id;
+  div.className = 'flex gap-2 items-center';
+  div.innerHTML = `
+    <input type="number" placeholder="${t('input.lump_month_placeholder')}" min="1" class="input-field" style="width:90px;" id="lump-month-${lumpSumCounter}" />
+    <input type="number" placeholder="${t('input.lump_amount_placeholder')}" min="1" class="input-field" id="lump-amount-${lumpSumCounter}" />
+    <button onclick="document.getElementById('${id}').remove()" class="text-slate-400 hover:text-red-400 shrink-0 text-xl leading-none">×</button>
+  `;
+  document.getElementById('lump-sum-list').appendChild(div);
+}
+
+// ────────────────────────────────────────────────────────
+// 核心计算逻辑
+// ────────────────────────────────────────────────────────
+function calculate() {
+  const loan = parseFloat(document.getElementById('loan_amount').value);
+  const rate = parseFloat(document.getElementById('annual_rate').value) / 100;
+  const years = parseInt(document.getElementById('loan_years').value);
+  const method = document.getElementById('repayment_method').value;
+  const freq = document.getElementById('payment_frequency').value;
+  const extraMonthly = parseFloat(document.getElementById('monthly_extra').value) || 0;
+
+  if (!loan || !rate || !years || loan <= 0 || rate <= 0 || years <= 0) {
+    alert(t('alert.invalid'));
+    return;
+  }
+
+  const lumpMap = {};
+  for (let i = 1; i <= lumpSumCounter; i++) {
+    const mEl = document.getElementById(`lump-month-${i}`);
+    const aEl = document.getElementById(`lump-amount-${i}`);
+    if (mEl && aEl && mEl.value && aEl.value) {
+      const m = parseInt(mEl.value);
+      const a = parseFloat(aEl.value);
+      if (m > 0 && a > 0) lumpMap[m] = (lumpMap[m] || 0) + a;
+    }
+  }
+
+  const periodsPerYear = freq === 'biweekly' ? 26 : 12;
+  const periodRate = rate / periodsPerYear;
+  const totalPeriods = years * periodsPerYear;
+
+  let stdPayment;
+  if (method === 'equal_installment') {
+    stdPayment = periodRate === 0
+      ? loan / totalPeriods
+      : loan * periodRate * Math.pow(1+periodRate, totalPeriods) / (Math.pow(1+periodRate, totalPeriods) - 1);
+  } else {
+    stdPayment = loan / totalPeriods + loan * periodRate;
+  }
+
+  let balance = loan;
+  let totalInterest = 0, totalPayment = 0;
+  const schedule = [];
+
+  for (let period = 1; period <= totalPeriods; period++) {
+    if (balance <= 0.01) break;
+    const interest = +(balance * periodRate).toFixed(2);
+    let principal, payment;
+    if (method === 'equal_installment') {
+      payment = +stdPayment.toFixed(2);
+      principal = +(payment - interest).toFixed(2);
+      if (principal > balance) { principal = +balance.toFixed(2); payment = +(principal + interest).toFixed(2); }
+    } else {
+      principal = +(loan / totalPeriods).toFixed(2);
+      if (principal > balance) principal = +balance.toFixed(2);
+      payment = +(principal + interest).toFixed(2);
+    }
+    const lump = lumpMap[period] || 0;
+    let extra = Math.max(Math.min(lump + extraMonthly, balance - principal), 0);
+    extra = +extra.toFixed(2);
+    balance = +(balance - principal - extra).toFixed(2);
+    totalInterest += interest;
+    totalPayment += payment + extra;
+    schedule.push({ period, payment, principal, interest, extra, balance: Math.max(balance, 0) });
+  }
+
+  let baselineInterest;
+  if (method === 'equal_installment') {
+    baselineInterest = periodRate > 0 ? stdPayment * totalPeriods - loan : 0;
+  } else {
+    baselineInterest = 0; let b = loan;
+    for (let i = 0; i < totalPeriods; i++) {
+      baselineInterest += b * periodRate;
+      b -= loan / totalPeriods; if (b < 0) b = 0;
+    }
+  }
+  const saved = Math.max(+(baselineInterest - totalInterest).toFixed(2), 0);
+
+  fullScheduleData = schedule;
+  lastCalcData = { stdPayment, totalPayment, totalInterest, loan, periods:schedule.length, saved, schedule };
+  renderResults(lastCalcData);
+}
+
+// ────────────────────────────────────────────────────────
+// 渲染结果
+// ────────────────────────────────────────────────────────
+function renderResults(data) {
+  const preset = COUNTRY_PRESETS[currentCountry];
+  const sym = preset.symbol;
+  const fmt = n => sym + ' ' + Math.round(n).toLocaleString();
+
+  document.getElementById('empty-state').classList.add('hidden');
+  const area = document.getElementById('result-area');
+  area.classList.remove('hidden');
+  area.classList.add('fade-in');
+
+  document.getElementById('r-monthly').textContent = fmt(data.stdPayment);
+  document.getElementById('r-currency-label').textContent = preset.currency + ' ' + t('result.currency_month');
+  document.getElementById('r-total').textContent = fmt(data.totalPayment);
+  document.getElementById('r-interest').textContent = fmt(data.totalInterest);
+  document.getElementById('r-periods').textContent = data.periods + ' ' + t('result.per_period');
+  document.getElementById('r-saved').textContent = data.saved > 0 ? fmt(data.saved) : '-';
+
+  renderPieChart(data.loan, data.totalInterest);
+  renderLineChart(data.schedule);
+
+  showingFull = false;
+  renderScheduleTable(data.schedule.slice(0, 24));
+  updateScheduleNote(data.schedule.length, false);
+  document.getElementById('toggle-btn').textContent = data.schedule.length > 24 ? t('result.show_all') : '';
+}
+
+function refreshResultLabels() {
+  if (!lastCalcData) return;
+  const preset = COUNTRY_PRESETS[currentCountry];
+  document.getElementById('r-currency-label').textContent = preset.currency + ' ' + t('result.currency_month');
+  document.getElementById('r-periods').textContent = lastCalcData.periods + ' ' + t('result.per_period');
+  updateScheduleNote(lastCalcData.schedule.length, showingFull);
+  document.getElementById('toggle-btn').textContent = showingFull ? t('result.collapse') : t('result.show_all');
+}
+
+function updateScheduleNote(total, isFull) {
+  const note = document.getElementById('schedule-note');
+  if (isFull || total <= 24) {
+    note.textContent = t('result.note_total').replace('{total}', total);
+  } else {
+    note.textContent = t('result.note_showing').replace('{n}', 24).replace('{total}', total);
+  }
+}
+
+// ────────────────────────────────────────────────────────
+// 图表（浅色主题）
+// ────────────────────────────────────────────────────────
+function renderPieChart(principal, interest) {
+  const ctx = document.getElementById('pieChart').getContext('2d');
+  if (pieChartInst) pieChartInst.destroy();
+  pieChartInst = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: [t('chart.principal'), t('chart.interest')],
+      datasets: [{
+        data: [Math.round(principal), Math.round(interest)],
+        backgroundColor: ['#3b82f6','#f59e0b'],
+        borderColor: ['#ffffff','#ffffff'], borderWidth: 3, hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position:'bottom', labels:{ color:'#64748b', font:{size:11}, padding:12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${Math.round(ctx.raw).toLocaleString()}` } }
+      },
+      cutout: '65%',
+    }
+  });
+}
+
+function renderLineChart(schedule) {
+  const ctx = document.getElementById('lineChart').getContext('2d');
+  if (lineChartInst) lineChartInst.destroy();
+  const step = Math.max(1, Math.floor(schedule.length / 60));
+  const sampled = schedule.filter((_, i) => i % step === 0 || i === schedule.length - 1);
+
+  lineChartInst = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: sampled.map(s => t('chart.period_label').replace('{n}', s.period)),
+      datasets: [{
+        label: t('chart.balance_label'),
+        data: sampled.map(s => s.balance),
+        borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.08)',
+        fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels:{ color:'#64748b', font:{size:11} } },
+        tooltip: { callbacks: { label: ctx => ` ${t('chart.balance_label')}: ${Math.round(ctx.raw).toLocaleString()}` } }
+      },
+      scales: {
+        x: { ticks:{ color:'#94a3b8', font:{size:10}, maxTicksLimit:6 }, grid:{ color:'#f1f5f9' } },
+        y: {
+          ticks: {
+            color:'#94a3b8', font:{size:10},
+            callback: v => currentLang === 'en' ? (v/1000).toFixed(0)+'K' : (v/10000).toFixed(0)+'万'
+          },
+          grid: { color:'#f1f5f9' }
+        }
+      }
+    }
+  });
+}
+
+function refreshChartsLabels() {
+  if (!lastCalcData) return;
+  renderPieChart(lastCalcData.loan, lastCalcData.totalInterest);
+  renderLineChart(lastCalcData.schedule);
+}
+
+// ────────────────────────────────────────────────────────
+// 还款计划表
+// ────────────────────────────────────────────────────────
+function refreshScheduleHeaders() {
+  const headers = ['result.col_period','result.col_payment','result.col_principal','result.col_interest','result.col_extra','result.col_balance'];
+  document.querySelectorAll('.schedule-table th').forEach((th, i) => {
+    if (headers[i]) th.textContent = t(headers[i]);
+  });
+}
+
+function renderScheduleTable(rows) {
+  const sym = COUNTRY_PRESETS[currentCountry].symbol;
+  const fmt = n => sym + Math.round(n).toLocaleString();
+  document.getElementById('schedule-body').innerHTML = rows.map(r => `
+    <tr>
+      <td class="text-slate-400">${r.period}</td>
+      <td class="text-slate-700 font-medium">${fmt(r.payment)}</td>
+      <td class="text-blue-500">${fmt(r.principal)}</td>
+      <td class="text-amber-500">${fmt(r.interest)}</td>
+      <td class="text-emerald-500">${r.extra > 0 ? fmt(r.extra) : '-'}</td>
+      <td class="text-slate-600">${fmt(r.balance)}</td>
+    </tr>
+  `).join('');
+}
+
+function toggleFullSchedule() {
+  showingFull = !showingFull;
+  if (showingFull) {
+    renderScheduleTable(fullScheduleData);
+    document.getElementById('toggle-btn').textContent = t('result.collapse');
+  } else {
+    renderScheduleTable(fullScheduleData.slice(0, 24));
+    document.getElementById('toggle-btn').textContent = t('result.show_all');
+  }
+  updateScheduleNote(fullScheduleData.length, showingFull);
+}
+
+// ────────────────────────────────────────────────────────
+// 下载 CSV
+// ────────────────────────────────────────────────────────
+function downloadCSV() {
+  if (!fullScheduleData.length) return;
+  const preset = COUNTRY_PRESETS[currentCountry];
+  const headers = [t('result.col_period'),t('result.col_payment'),t('result.col_principal'),t('result.col_interest'),t('result.col_extra'),t('result.col_balance'),'Currency'];
+  const rows = fullScheduleData.map(r =>
+    [r.period,r.payment.toFixed(2),r.principal.toFixed(2),r.interest.toFixed(2),r.extra.toFixed(2),r.balance.toFixed(2),preset.currency].join(',')
+  );
+  const csv = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `mortgage_schedule_${preset.currency}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+// ────────────────────────────────────────────────────────
+// 汇率工具栏
+// ────────────────────────────────────────────────────────
+async function loadExchangeRates() {
+  let rates = null;
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD', { signal: AbortSignal.timeout(4000) });
+    if (res.ok) { const d = await res.json(); if (d.result==='success') rates = d.rates; }
+  } catch {}
+
+  const targets = ['CNY','HKD','GBP','EUR','JPY','SGD','AUD','CAD','KRW','AED'];
+  const getRate = cur => {
+    if (rates && rates[cur]) return rates[cur].toFixed(cur==='JPY'||cur==='KRW'?1:4);
+    return (FALLBACK_RATES[cur]||0).toFixed(cur==='JPY'||cur==='KRW'?1:4);
+  };
+  document.getElementById('rate-chips').innerHTML = targets.map(c => `
+    <span class="rate-chip">
+      <span class="text-slate-400 text-xs">USD/</span><span class="text-slate-700 font-semibold text-xs">${c}</span>
+      <span class="text-blue-500 ml-1.5 font-medium text-xs">${getRate(c)}</span>
+    </span>
+  `).join('');
+}
+
+// ────────────────────────────────────────────────────────
+// 重置
+// ────────────────────────────────────────────────────────
+function resetForm() {
+  document.getElementById('loan_amount').value = 1000000;
+  document.getElementById('annual_rate').value = 3.95;
+  document.getElementById('loan_years').value = 30;
+  document.getElementById('repayment_method').value = 'equal_installment';
+  document.getElementById('payment_frequency').value = 'monthly';
+  document.getElementById('monthly_extra').value = 0;
+  document.getElementById('lump-sum-list').innerHTML = '';
+  lumpSumCounter = 0;
+  lastCalcData = null;
+  fullScheduleData = [];
+  document.getElementById('empty-state').classList.remove('hidden');
+  document.getElementById('result-area').classList.add('hidden');
+  selectCountry('CN');
+}
+</script>
+</body>
+</html>
